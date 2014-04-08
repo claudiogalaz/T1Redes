@@ -13,20 +13,19 @@ import com.sun.net.httpserver.HttpServer;
 public class SimpleHttpServer {
 
   public static void main(String[] args) throws Exception {
-    HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-    server.createContext("/", new Handler1());
+    HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+    server.createContext("/test", new MyHandler());
     server.setExecutor(null); // creates a default executor
     server.start();
   }
 
-  static class Handler1 implements HttpHandler {
+  static class MyHandler implements HttpHandler {
     public void handle(HttpExchange t) throws IOException {
-      String response = "Primera prueba";
+      String response = "Welcome Real's HowTo test page";
       t.sendResponseHeaders(200, response.length());
       OutputStream os = t.getResponseBody();
       os.write(response.getBytes());
       os.close();
     }
   }
-
 }
