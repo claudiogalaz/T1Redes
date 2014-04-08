@@ -21,7 +21,7 @@ public class SimpleHttpServer {
 
   static class Handler1 implements HttpHandler {
     public void handle(HttpExchange t) throws IOException {
-      String response = "segunda prueba GIT";
+      String response = "segunda prueba GIT blah";
       t.sendResponseHeaders(200, response.length());
       OutputStream os = t.getResponseBody();
       os.write(response.getBytes());
