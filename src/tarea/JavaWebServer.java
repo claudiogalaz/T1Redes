@@ -51,8 +51,8 @@ public class JavaWebServer
 	        }
 		}
     }
-
    
+
 	private static void HandleRequest(Socket s) 
 	{ 
 		BufferedReader in;
