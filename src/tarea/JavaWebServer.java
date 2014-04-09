@@ -17,12 +17,11 @@ public class JavaWebServer
 	public static void main(String[] args) throws IOException 
 	{ 
 
-		int i=0;
-		
-		ServerSocket socket = new ServerSocket(8080);
-		
-		if (i==0)
+		try
 		{
+		
+			ServerSocket socket = new ServerSocket(8080);
+			
 	  		while (true) 
 	  		{ 
 	  			final Socket connection = socket.accept();
@@ -37,12 +36,23 @@ public class JavaWebServer
 				fThreadPool.execute(task);
 			}
 		}
-		else
-		{
-			socket.close();
+		catch (IOException e)
+		{			
 		}
+		finally
+		{
+			try 
+	        {
+	        	socket.close();
+	        } 
+	        catch (IOException e1)
+	        {
+	            e1.printStackTrace(System.err);
+	        }
+		}
+    }
 
-	}   
+   
 	private static void HandleRequest(Socket s) 
 	{ 
 		BufferedReader in;
