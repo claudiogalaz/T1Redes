@@ -17,11 +17,6 @@ public class JavaWebServer
 	public static void main(String[] args) throws IOException 
 	{ 
 
-<<<<<<< HEAD
-=======
-		int i=0;
-		
->>>>>>> FETCH_HEAD
 		ServerSocket socket = new ServerSocket(8080);
 		
   		while (true) 
