@@ -80,11 +80,6 @@ public class JavaWebServer
  			out.println("HTTP/1.0 200");
  			out.println("Content-type: text/html");
  			out.println("Server-name: myserver");
- 			/*String response = "<html>n"
- 					+ "<head>n" 
- 					+ "<title>Guatón te amo</title></head>n" 
- 					+ "<h1>Welcome to my Web Server!</h1>n"
- 					+ "</html>n";*/
  			out.println("Content-length: " + home.length());
  			out.println("");
  			out.println(home);
