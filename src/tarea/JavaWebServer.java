@@ -17,23 +17,31 @@ public class JavaWebServer
 	public static void main(String[] args) throws IOException 
 	{ 
 
+		int i=0;
 		
 		ServerSocket socket = new ServerSocket(8080);
 		
-  		while (true) 
-  		{ 
-  			final Socket connection = socket.accept();
-  			Runnable task = new Runnable() 
-  			{ 
-  				@Override 
-  				public void run() 
-  				{ 
-  					HandleRequest(connection);
-  				} 
-  			};
-			fThreadPool.execute(task);
+		if (i==0)
+		{
+	  		while (true) 
+	  		{ 
+	  			final Socket connection = socket.accept();
+	  			Runnable task = new Runnable() 
+	  			{ 
+	  				@Override 
+	  				public void run() 
+	  				{ 
+	  					HandleRequest(connection);
+	  				} 
+	  			};
+				fThreadPool.execute(task);
+			}
 		}
-  		
+		else
+		{
+			socket.close();
+		}
+
 	}   
 	private static void HandleRequest(Socket s) 
 	{ 
