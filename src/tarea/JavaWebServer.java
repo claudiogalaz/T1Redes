@@ -16,6 +16,7 @@ public class JavaWebServer
 
 	public static void main(String[] args) throws IOException 
 	{ 
+		@SuppressWarnings("resource")
 		ServerSocket socket = new ServerSocket(81);
   		while (true) 
   		{ 
