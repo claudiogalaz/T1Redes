@@ -17,10 +17,11 @@ public class JavaWebServer
 	public static void main(String[] args) throws IOException 
 	{ 
 
+		ServerSocket socket = null;
 		try
 		{
 		
-			ServerSocket socket = new ServerSocket(8080);
+			socket = new ServerSocket(8080);
 			
 	  		while (true) 
 	  		{ 
