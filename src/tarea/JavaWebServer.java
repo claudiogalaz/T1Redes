@@ -16,12 +16,10 @@ public class JavaWebServer
 
 	public static void main(String[] args) throws IOException 
 	{ 
-<<<<<<< HEAD
-		ServerSocket socket = new ServerSocket(8080);
-=======
+
 		@SuppressWarnings("resource")
-		ServerSocket socket = new ServerSocket(81);
->>>>>>> 116579a536fcdef2f7d894e009a1d5e822f0298b
+		ServerSocket socket = new ServerSocket(8080);
+		
   		while (true) 
   		{ 
   			final Socket connection = socket.accept();
