@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 
 import org.apache.commons.io.IOUtils;
 
-public class JavaWebServer 
+public class Paraprobar 
 {   
 	private static final int fNumberOfThreads = 100;
 	private static final Executor fThreadPool = Executors.newFixedThreadPool(fNumberOfThreads);
