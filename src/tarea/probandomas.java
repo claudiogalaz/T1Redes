@@ -137,15 +137,41 @@ public class probandomas
 
  			out = new PrintWriter(s.getOutputStream(), true);
  			
+ 			//el método es GET
  			if (uri.equals("/"))
  			{	
- 				out.println("dsgsbgs");
+ 				
+ 				out.println
+ 				(
+ 						"<html>"+
+ 								"<head >"+
+ 									"<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>"+
+ 									"<title>Contactos</title>"+
+ 								"</head>"+
+ 						"<body>"+
+ 						"<center>"+
+ 						"<h1>Contactos</h1>"+
+ 						"<table style = \"width:300px\" border= \"1\" align= \"center\" "+
+ 							"<tr>"+
+ 								"<td>Nombre</td>"+
+ 								"<td>IP</td>"+
+ 								"<td>Puerto</td>"+
+ 							"</tr>"						
+ 				);
+ 				
+ 				out.println
+ 				(
+ 						"</center>"+
+ 						"</body>"+
+ 						"</html>"
+ 				);		
+ 				
  			}
  			else if (uri.equals("/ingresar"))
  			{
- 				InputStream archivo = new FileInputStream ("home.html");
- 	 			String home = IOUtils.toString(archivo, "UTF-8");
- 				out.println(home);
+ 				InputStream archivo = new FileInputStream ("form.html");
+ 	 			String form = IOUtils.toString(archivo, "UTF-8");
+ 				out.println(form);
  			}
  			out.flush();
  			out.close();

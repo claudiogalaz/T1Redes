@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.Charset;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.concurrent.Executor;
@@ -142,9 +143,39 @@ public class JavaWebServer
 
  			out = new PrintWriter(s.getOutputStream(), true);
  			
+ 			//el método es GET
  			if (uri.equals("/"))
  			{	
- 				out.println("dsgsbgs");
+ 				
+ 				out.println
+ 				(
+ 						"<html>"+
+ 								"<head >"+
+ 									"<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>"+
+ 									"<title>Contactos</title>"+
+ 								"</head>"+
+ 						"<body>"+
+ 						"<center>"+
+ 						"<h1>Contactos</h1>"+
+ 						"<table style = \"width:300px\" border= \"1\" align= \"center\" "+
+ 							"<tr>"+
+ 								"<td>Nombre</td>"+
+ 								"<td>IP</td>"+
+ 								"<td>Puerto</td>"+
+ 							"</tr>"						
+ 				);
+ 				leer(out);
+ 				out.println
+ 				(
+ 						"</table>"+
+ 						"<form action= '/ingresar'>"+
+ 					    "<input type='submit' value='Agregar Contacto'>"+
+ 					    "</form>"+
+ 						"</center>"+
+ 						"</body>"+
+ 						"</html>"
+ 				);		
+ 				
  			}
  			else if (uri.equals("/ingresar"))
  			{
@@ -247,5 +278,62 @@ public class JavaWebServer
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void leer(PrintWriter out) {
+		 	InputStream fis = null;
+			BufferedReader br;
+			String line;
+			String[] partes;
+
+			try {
+				fis = new FileInputStream("contactos.txt");
+			
+				br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
+			String primera = br.readLine();
+			if (primera == null) {
+				out.println
+ 				(
+ 						"<tr>"+
+ 								"<td>No hay contactos</td>"+
+ 						"</tr>"	
+ 				);	
+			}
+			else 
+			{
+				//La primera linea se imprime aparte para confirmar antes si estaba vacio
+				partes = primera.split(",");
+				out.println
+ 				(
+ 						"<tr>"+
+ 								"<td>"+ partes[0] +"</td>"+
+ 								"<td>"+ partes[1] +"</td>"+
+ 								"<td>"+ partes[2] +"</td>"+
+ 						"</tr>"	
+ 				);
+				//imprimir
+				while ((line = br.readLine()) != null) {
+				    // Deal with the line
+					partes = line.split(",");
+					out.println
+	 				(
+	 						"<tr>"+
+	 								"<td>"+ partes[0] +"</td>"+
+	 								"<td>"+ partes[1] +"</td>"+
+	 								"<td>"+ partes[2] +"</td>"+
+	 						"</tr>"	
+	 				);
+					
+				}
+			}
+			
+			// Done with the file
+			br.close();
+			br = null;
+			fis = null;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
  }
