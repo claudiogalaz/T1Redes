@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 
 import org.apache.commons.io.IOUtils;
 
-public class JavaWebServer 
+public class probandomas 
 {   
 	private static final int fNumberOfThreads = 100;
 	private static final Executor fThreadPool = Executors.newFixedThreadPool(fNumberOfThreads);
@@ -143,9 +143,9 @@ public class JavaWebServer
  			}
  			else if (uri.equals("/ingresar"))
  			{
- 				InputStream archivo = new FileInputStream ("form.html");
- 	 			String form = IOUtils.toString(archivo, "UTF-8");
- 				out.println(form);
+ 				InputStream archivo = new FileInputStream ("home.html");
+ 	 			String home = IOUtils.toString(archivo, "UTF-8");
+ 				out.println(home);
  			}
  			out.flush();
  			out.close();
