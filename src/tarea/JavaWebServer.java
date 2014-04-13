@@ -252,8 +252,20 @@ public class JavaWebServer
 		try {
  
 			String name = contactos.getProperty("Name");
+			if((contactos.getProperty("Name")).equals("")){
+				name = "-";
+			}
+			
 			String ip = contactos.getProperty("Aipi");
+			if((contactos.getProperty("Aipi")).equals("")){
+				ip = "-";
+			}
+			
 			String port = contactos.getProperty("Port");
+			if((contactos.getProperty("Port")).equals("")){
+				port = "-";
+			}
+			
 			String escribe = new String (name + "," + ip + "," + port + "\n");
  
 			File file = new File("contactos.txt");
@@ -287,9 +299,7 @@ public class JavaWebServer
 			String[] partes;
 
 			try {
-				fis = new FileInputStream("contactos.txt");
-			
-				br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
+				
 			
 				//para verificar si no hay contactos
 				File file = new File("contactos.txt");
@@ -303,9 +313,11 @@ public class JavaWebServer
 				}
 				else 
 				{
+					fis = new FileInputStream("contactos.txt");
+					
+					br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
 					//imprimir
 					while ((line = br.readLine()) != null) {
-					    // Deal with the line
 						partes = line.split(",");
 						out.println
 		 				(
@@ -317,12 +329,11 @@ public class JavaWebServer
 		 				);
 						
 					}
+					br.close();
+					br = null;
+					fis = null;
 				}
 			
-				// Done with the file
-				br.close();
-				br = null;
-				fis = null;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
