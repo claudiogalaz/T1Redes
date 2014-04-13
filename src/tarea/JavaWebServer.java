@@ -1,7 +1,10 @@
 package tarea;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -78,6 +81,7 @@ public class JavaWebServer
  			request = in.readLine();
  			
  			StringTokenizer st = new StringTokenizer(request);
+ 			//ESTO (method) DEFINE SI ES GET O POST
  			String method = st.nextToken();
  			
  	        String uri = decodePercent(st.nextToken());
@@ -103,7 +107,7 @@ public class JavaWebServer
  		          }
  		    }
  			
- 			//EMPIEZA POST
+ 			//Si es POST entra, en caso contrario (GET) hace solo el resto
  			if (method.equalsIgnoreCase("POST")) 
  			{
  				long size = 0x7FFFFFFFFFFFFFFFl;
@@ -128,7 +132,8 @@ public class JavaWebServer
 					postLine = postLine.trim();
  		          
 					decodeParms(postLine, parms);
- 		          
+					
+					guardar(parms);
 					String name = parms.getProperty("Name");
 					System.out.println(name);
  		    }
@@ -203,5 +208,32 @@ public class JavaWebServer
 	        if (sep >= 0)
 	          p.put(decodePercent(e.substring(0, sep)).trim(), decodePercent(e.substring(sep + 1)));
 	      }
+	}
+	
+	public static void guardar(Properties contactos) {
+		try {
+ 
+			String name = contactos.getProperty("Name");
+			String ip = contactos.getProperty("Aipi");
+			String port = contactos.getProperty("Port");
+			String escribe = new String (name + "," + ip + "," + port + ";");
+ 
+			File file = new File("contactos.txt");
+			//file.createNewFile();
+			
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+ 
+			FileWriter fw = new FileWriter(file.getAbsoluteFile());
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(escribe);
+			bw.close();
+ 
+			System.out.println("Done");
+ 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
  }
