@@ -143,7 +143,7 @@ public class JavaWebServer
 
  			out = new PrintWriter(s.getOutputStream(), true);
  			
- 			//el método es GET
+ 			//el metodo es GET
  			if (uri.equals("/"))
  			{	
  				
