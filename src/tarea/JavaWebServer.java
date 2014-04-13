@@ -274,7 +274,7 @@ public class JavaWebServer
 			}
  
 			System.out.println("Nombre agregado...");
- 
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -290,47 +290,39 @@ public class JavaWebServer
 				fis = new FileInputStream("contactos.txt");
 			
 				br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
-			String primera = br.readLine();
-			if (primera == null) {
-				out.println
- 				(
- 						"<tr>"+
- 								"<td>No hay contactos</td>"+
- 						"</tr>"	
- 				);	
-			}
-			else 
-			{
-				//La primera linea se imprime aparte para confirmar antes si estaba vacio
-				partes = primera.split(",");
-				out.println
- 				(
- 						"<tr>"+
- 								"<td>"+ partes[0] +"</td>"+
- 								"<td>"+ partes[1] +"</td>"+
- 								"<td>"+ partes[2] +"</td>"+
- 						"</tr>"	
- 				);
-				//imprimir
-				while ((line = br.readLine()) != null) {
-				    // Deal with the line
-					partes = line.split(",");
+			
+				//para verificar si no hay contactos
+				File file = new File("contactos.txt");
+				if (!file.exists()) {
 					out.println
 	 				(
 	 						"<tr>"+
-	 								"<td>"+ partes[0] +"</td>"+
-	 								"<td>"+ partes[1] +"</td>"+
-	 								"<td>"+ partes[2] +"</td>"+
+	 								"<td>No hay contactos</td>"+
 	 						"</tr>"	
-	 				);
-					
+	 				);	
 				}
-			}
+				else 
+				{
+					//imprimir
+					while ((line = br.readLine()) != null) {
+					    // Deal with the line
+						partes = line.split(",");
+						out.println
+		 				(
+		 						"<tr>"+
+		 								"<td>"+ partes[0] +"</td>"+
+		 								"<td>"+ partes[1] +"</td>"+
+		 								"<td>"+ partes[2] +"</td>"+
+		 						"</tr>"	
+		 				);
+						
+					}
+				}
 			
-			// Done with the file
-			br.close();
-			br = null;
-			fis = null;
+				// Done with the file
+				br.close();
+				br = null;
+				fis = null;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
