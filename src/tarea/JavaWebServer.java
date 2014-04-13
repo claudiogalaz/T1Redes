@@ -223,21 +223,26 @@ public class JavaWebServer
 			String name = contactos.getProperty("Name");
 			String ip = contactos.getProperty("Aipi");
 			String port = contactos.getProperty("Port");
-			String escribe = new String (name + "," + ip + "," + port + ";");
+			String escribe = new String (name + "," + ip + "," + port + "\n");
  
 			File file = new File("contactos.txt");
 			//file.createNewFile();
 			
 			if (!file.exists()) {
 				file.createNewFile();
+				FileWriter fw = new FileWriter(file.getAbsoluteFile());
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(escribe);
+				bw.close();
+			}
+			else {
+				FileWriter fw = new FileWriter(file, true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(escribe);
+				bw.close();
 			}
  
-			FileWriter fw = new FileWriter(file.getAbsoluteFile());
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(escribe);
-			bw.close();
- 
-			System.out.println("Done");
+			System.out.println("Nombre agregado...");
  
 		} catch (IOException e) {
 			e.printStackTrace();
