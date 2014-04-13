@@ -146,7 +146,10 @@ public class JavaWebServer
  		catch (IOException e) 
  		{ 
  			System.out.println("Failed respond to client request: " + e.getMessage());
- 		} 
+ 		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
  		finally 
  		{ 
  			if (s != null) 
